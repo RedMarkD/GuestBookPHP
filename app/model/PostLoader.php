@@ -1,8 +1,5 @@
 <?php
-
-
-require "Post.php";
-require "Guestbook.php";
+declare(strict_types=1);
 
 
 class PostLoader
@@ -13,31 +10,20 @@ class PostLoader
 //then have a function to get the data from the guestbook
 //to then send to view.
 {
-    private Post $post;
-    private Guestbook $allposts;
+    private object $post;
 
-    public function __construct($post){
-        $this->post = $post;
+    public function __construct(){
+        $this->post = new Post($_POST["title"], date('D, d M Y H:i:s'),  $_POST["content"], $_POST["author"]);
+    }
+    public function setUserPost(){
+        file_put_contents("file.json", $this->post, FILE_APPEND);
     }
     public function getUserPost(){
-        $this->post = new Post;
-
-
-        if (isset( $_POST['submit'])){
-            echo "posts" ;
-        }
-        else {
-            $posts = [];
-            foreach ($posts as $this->post) {
-                array_push($posts, $this->post);
-            }
+        file_get_contents("file.json");
     }
-
+    public function getGuestBook(){
+        $read = file_get_contents("file.json");
+        $show = json_decode($read);
+        echo $show;
     }
-    public function setGuestBook(){
-        array_push($this->setPost(), $this->post);
-    }
-
-    //load posts
-    //save posts
 }

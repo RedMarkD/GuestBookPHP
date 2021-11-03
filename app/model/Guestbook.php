@@ -1,29 +1,22 @@
 <?php
-require "PostLoader.php";
+declare(strict_types=1);
 
 class Guestbook
 //what does this do.
 //contains all posts previously posted.
 //should be used by the PostLoader to get the array of all posts
 // to then select the last twenty and post them
-
-
 {
-    private Post $post;
-    private array $allPosts;
-        /**
-     * @return array
-     */
+    private string $guestbook;
 
     public function __construct(){
-        $this->post = new Post();
-        $this->allPosts = $allPosts;
+        $this->guestbook = file_get_contents("file.json");
     }
-    public function getGuestbook(): array
+    public function getGuestbook(): string
     {
-        return $this->allPosts;
+        return $this->guestbook;
     }
     public function getPost(){
-        $this->post;
+
     }
 }

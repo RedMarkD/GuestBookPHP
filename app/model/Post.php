@@ -1,5 +1,7 @@
 <?php
+declare(strict_types=1);
 
+//concept post, should always contain title,date, content, author.
 class Post
 //what does this do.
 //This should be the definition of what a post is specifically
@@ -7,17 +9,15 @@ class Post
 //to see what information the user posted and how we want to make it into an object.
 //
 {
-    private Post $post
+    private string $title;
+    private string $date;
+    private string $content;
+    private string $author;
 
-    public function __construct($post, $title) {
-        $this->post = new Post();
-
-    }
-    public function getPost(){
-        return $this->post;
-    }
-    public function getTitle()
-    {
-      return $this->title;
+    public function __construct(string $title, string $date, string $content, string $author) {
+            $this->title= $title;
+            $this->date = $date;
+            $this->content = $content;
+            $this->author = $author;
     }
 }
