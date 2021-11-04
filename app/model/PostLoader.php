@@ -1,29 +1,33 @@
+
 <?php
-declare(strict_types=1);
+
+class PostLoader{
+
+    public function appendPost($post)
+    {
+        //$post = json_encode($post);
+//        file_put_contents("file.json", $post, FILE_APPEND);
+        $getfile = file_get_contents("file.json");
+        $decfile = json_decode($getfile);
+        $decfile[]= $post;
+        $enc = json_encode($decfile);
+        file_put_contents("file.json", $enc);
+    }
 
 
-class PostLoader
-//what does this do.
-//postloader is DataController
-//this should both get the data from the view,
-//immediately write it into the Guestbook.
-//then have a function to get the data from the guestbook
-//to then send to view.
-{
-    private object $post;
+    public function getAllPosts()
+    {
+        $file = file_get_contents("file.json");
+        $dec = json_decode($file);
+        $sli = array_slice($dec, -20, 20);
+        $rev = array_reverse($sli);
+        foreach ($rev as $i) {
+            echo "<br>";
+            echo "title:" . $i[0] . "<br>";
+            echo "date:" . $i[1] . "<br>";
+            echo "content:" . $i[2] . "<br>";
+            echo "author:" . $i[3] . "<br>";
 
-    public function __construct(){
-        $this->post = new Post($_POST["title"], date('D, d M Y H:i:s'),  $_POST["content"], $_POST["author"]);
-    }
-    public function setUserPost(){
-        file_put_contents("file.json", $this->post, FILE_APPEND);
-    }
-    public function getUserPost(){
-        file_get_contents("file.json");
-    }
-    public function getGuestBook(){
-        $read = file_get_contents("file.json");
-        $show = json_decode($read);
-        echo $show;
+        }
     }
 }
