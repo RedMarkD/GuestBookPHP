@@ -21,13 +21,14 @@ class PostLoader{
         $dec = json_decode($file);
         $sli = array_slice($dec, -20, 20);
         $rev = array_reverse($sli);
+        print_r($rev[0][0]);
         foreach ($rev as $i) {
             echo "<br>";
             echo "title:" . $i[0] . "<br>";
             echo "date:" . $i[1] . "<br>";
             echo "content:" . $i[2] . "<br>";
             echo "author:" . $i[3] . "<br>";
-
         }
     }
+
 }
